@@ -8,5 +8,17 @@
     "percentToQualify": "100",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "younomefrom",
+            "link": "https://discord.com/channels/1379628749523386378/1379847747200614481",
+            "percent": 100,
+            "hz": 240
+        },
+        {
+            "user": "Birkk",
+            "link": "https://www.youtube.com/watch?v=EG4nuqnwqYQ",
+            "percent": 100,
+            "hz": 60
+        }
     ]
 }
