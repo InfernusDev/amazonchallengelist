@@ -19,6 +19,12 @@
             "link": "https://www.youtube.com/watch?v=EG4nuqnwqYQ",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "tFluffy",
+            "link": "https://youtu.be/hc-BtZ2wU_o",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
