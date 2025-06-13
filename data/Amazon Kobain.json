@@ -8,5 +8,11 @@
     "percentToQualify": "100",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "younomefrom",
+            "link": "https://youtu.be/CZauyZRJAgU",
+            "percent": 100,
+            "hz": 240
+        }
     ]
 }
