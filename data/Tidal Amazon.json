@@ -8,5 +8,11 @@
     "percentToQualify": "100",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "tFluffy",
+            "link": "https://www.youtube.com/watch?v=BME3nrkijdM",
+            "percent": 100,
+            "hz": 240
+        }
     ]
 }
