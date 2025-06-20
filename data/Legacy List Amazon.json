@@ -8,5 +8,11 @@
     "percentToQualify": "100",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "Judah [GD]",
+            "link": "https://youtu.be/Yc2O7rpfBw8",
+            "percent": 100,
+            "hz": 240
+        }
     ]
 }
