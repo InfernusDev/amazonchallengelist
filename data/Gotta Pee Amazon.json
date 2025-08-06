@@ -8,5 +8,11 @@
     "percentToQualify": "100",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "Setback",
+            "link": "https://www.youtube.com/watch?v=7qplBFd6zoc",
+            "percent": 100,
+            "hz": 360
+        }
     ]
 }
