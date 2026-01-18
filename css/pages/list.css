@@ -1,6 +1,6 @@
 /* ---------------------------
    Modern Geometry Dash List - Inspired by Pointercrate Challenge List
-   Sleek Dark Gray Theme with Horizontal Cards (Added Extra Padding)
+   Sleek Dark Gray Theme with Horizontal Cards (Increased Sidebar Padding)
    --------------------------- */
 
 /* Updated color palette: Grayscale dark theme for sleek, professional look */
@@ -94,7 +94,7 @@
   width: 100%;
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 1rem; /* Tiny bit more internal padding */
+  padding: 1.5rem; /* Increased padding here for more space around text */
   box-shadow: var(--card-shadow);
   transition: all .15s ease;
   overflow: hidden;
@@ -112,7 +112,7 @@
   height: 56px; /* 16:9 aspect for videos/thumbs */
   object-fit: cover;
   border-radius: 4px;
-  margin-right: 1.25rem; /* Slight increase */
+  margin-right: 1.5rem; /* Increased margin for more space */
   border: 1px solid var(--border);
 }
 
@@ -128,6 +128,19 @@
   font-size: 1rem;
   font-weight: 700;
   color: var(--accent);
+  margin-right: 1.5rem; /* Added space between rank and title */
+}
+
+.page-list .list .level button {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Increased gap for better spacing */
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
 .page-list .list .level .title {
