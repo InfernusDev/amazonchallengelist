@@ -1,176 +1,337 @@
-/* ---------- GLOBAL TYPING / SPACING ---------- */
-/* make text less "smushed" overall */
+/* ---------------------------
+   Modern / Clean Geometry Dash - Pointercrate Inspired
+   Apply after existing CSS to override previous rules
+   --------------------------- */
+
+/* color palette (dark theme) */
+:root{
+  --bg: #18181a;
+  --panel: #1f1f23;
+  --muted: #9aa0a6;
+  --accent: #ffd24a;     /* pointercrate-like highlight */
+  --accent-2: #7bd389;
+  --text: #ececec;
+  --subtle: rgba(255,255,255,0.04);
+  --radius: 12px;
+  --glass: rgba(255,255,255,0.02);
+  --card-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* base typography & smoothing */
 .page-list,
 .page-list * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.55; /* comfortable line-height for most text */
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--text);
+  line-height: 1.6;
 }
 
-/* ---------- LIST & ROWS ---------- */
-.page-list .list {
-    border-collapse: separate;
-    border-spacing: 0 1rem; /* more vertical space between rows */
-    table-layout: auto;
-    font-size: 1rem; /* ensure readable base size */
+/* layout container (three-column) */
+.page-list {
+  display: grid;
+  grid-template-columns: 300px 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+  padding: 2rem;
+  background: linear-gradient(180deg, #121216 0%, var(--bg) 100%);
+  min-height: calc(100vh - 48px);
 }
 
-/* Rank column: give more breathing room */
-.page-list .list .rank {
-    text-align: end;
-    padding-right: 1.75rem;
-    line-height: 1.6;
-    vertical-align: middle;
-}
-
-/* Level cell container */
-.page-list .list .level {
-    width: 100%;
-}
-
-/* ---------- BUTTON (level entry) ---------- */
-.page-list .list .level button {
-    width: 100%;
-    display: flex;
-    align-items: center;      /* vertically center multi-line text / icons */
-    gap: 0.75rem;             /* space between icon + text if present */
-    padding: 1.25rem 1.5rem;  /* larger padding all around */
-    min-height: 3.2rem;       /* prevents tight single-line height */
-    line-height: 1.6;         /* space between wrapped lines */
-    white-space: normal;      /* allow wrapping */
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    text-align: start;
-}
-
-/* hover / active preserved from GD style */
-.page-list .list .level button:hover { transform: translateY(-2px); }
-.page-list .list .level button:active { transform: translateY(2px); }
-
-/* error / active states keep spacing */
-.page-list .list .level.error button,
-.page-list .list .level.active button {
-    padding: 1.25rem 1.5rem;
-    min-height: 3.2rem;
-}
-
-/* ---------- LEVEL PANEL ---------- */
-.page-list .level-container .level {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;       /* bigger gap between subsections */
-    padding: 2.25rem;  /* more inner space */
-    max-width: 48rem;
-}
-
-/* authors grid: more vertical breathing room */
-.page-list .level-container .level .level-authors {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    grid-auto-rows: minmax(1.5rem, max-content);
+/* adapt to small screens: single column */
+@media (max-width: 980px) {
+  .page-list {
+    grid-template-columns: 1fr;
+    padding: 1rem;
     gap: 1.25rem;
+  }
+
+  .page-list .meta-container { order: 3; }
+  .page-list .level-container { order: 2; }
+  .page-list .list-container { order: 1; }
 }
 
-/* video block keep aspect but add margin */
+/* ---------- LEFT: List (sidebar) ---------- */
+.page-list .list-container {
+  position: relative;
+  align-self: start;
+  height: calc(100vh - 6rem);
+  overflow: hidden;
+  padding: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  box-shadow: var(--card-shadow);
+}
+
+/* internal scroll region with thin custom scrollbar */
+.page-list .list-container .list-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* thin modern scrollbar */
+.page-list .list-container .list-scroll::-webkit-scrollbar { width: 10px; }
+.page-list .list-container .list-scroll::-webkit-scrollbar-track { background: transparent; }
+.page-list .list-container .list-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.35));
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* list layout: each row is a card */
+.page-list .list {
+  display: block; /* we use a flex column of cards instead of table rows */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+/* individual level item as a clean card */
+.page-list .list .level {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+  padding: 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.45);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  overflow: hidden;
+}
+
+/* rank badge left */
+.page-list .list .level .rank {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+/* clickable area */
+.page-list .list .level button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.2rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 56px;
+  align-items: center;
+  display: flex;
+  gap: 0.9rem;
+}
+
+/* level title */
+.page-list .list .level button .title {
+  flex: 1 1 auto;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+/* subtle meta on the right of each item */
+.page-list .list .level button .meta {
+  color: var(--muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+/* hover / active */
+.page-list .list .level:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.page-list .list .level:active {
+  transform: translateY(-1px);
+}
+
+/* selected / active state */
+.page-list .list .level.active {
+  outline: 3px solid rgba(255,210,74,0.15);
+  background: linear-gradient(180deg, rgba(255,210,74,0.03), rgba(0,0,0,0.04));
+}
+
+/* error style */
+.page-list .list .level.error {
+  opacity: 0.7;
+  filter: grayscale(0.15);
+  text-decoration: line-through;
+}
+
+/* spacing for many items */
+.page-list .list .spacer { height: 0.5rem; }
+
+/* ---------- CENTER: Level content ---------- */
+.page-list .level-container {
+  align-self: start;
+  max-width: 100%;
+  padding: 0;
+}
+
+/* inner card for the selected level */
+.page-list .level-container .level {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  display: block;
+  gap: 1.25rem;
+}
+
+/* Title and meta row */
+.page-list .level-container .level h1 {
+  margin: 0 0 0.75rem 0;
+  font-size: 2.1rem;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+/* creators / small meta */
+.page-list .level-container .level .small-meta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-list .level-container .level .small-meta b { color: var(--text); font-weight: 700; }
+
+/* media/video */
 .page-list .level-container .level .video {
-    aspect-ratio: 16/9;
-    margin-bottom: 0.5rem;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--glass);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  margin-bottom: 0.5rem;
 }
 
-/* ---------- STATS ---------- */
-.page-list .level-container .level .stats {
-    display: flex;
-    justify-content: space-evenly;
-    text-align: center;
-    gap: 3rem;           /* more spacing between stat columns */
-    padding-block: 0.75rem;
+/* points/id/password row */
+.page-list .level-container .level .info-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
 }
 
-.page-list .level-container .level .stats li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 0.5rem 0;
+.page-list .level-container .level .info-row .item {
+  min-width: 110px;
+  font-size: 0.85rem;
 }
 
-/* ---------- RECORDS TABLE ---------- */
+/* records heading */
+.page-list .level-container .level h2 {
+  margin-top: 1.4rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* ---------- RECORDS TABLE (clean) ---------- */
 .page-list .level-container .level .records {
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 0 0.6rem; /* vertical space between record rows */
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .page-list .level-container .level .records tr {
-    display: table-row;
-    vertical-align: middle;
-    background: transparent; /* keep panel styling from parent */
+  background: rgba(255,255,255,0.01);
+  border-radius: 8px;
+  transition: background .12s;
 }
 
-.page-list .level-container .level .records tr td {
-    padding: 1rem 1.25rem;    /* more padding per cell */
-    line-height: 1.6;
-    vertical-align: middle;
+.page-list .level-container .level .records td {
+  padding: 0.7rem 0.9rem;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: var(--text);
 }
 
-.page-list .level-container .level .records .percent,
-.page-list .level-container .level .records .user,
-.page-list .level-container .level .records .hz {
-    padding-block: 1.25rem;
+.page-list .level-container .level .records tr:hover {
+  background: rgba(255,255,255,0.02);
 }
 
-/* make user column expand and not cramp text */
-.page-list .level-container .level .records .user {
-    width: 100%;
-    white-space: normal;
-    overflow-wrap: anywhere;
+/* ---------- RIGHT: Meta / Editors ---------- */
+.page-list .meta-container {
+  position: relative;
+  align-self: start;
 }
 
-/* right-align numeric-ish columns with breathing room */
-.page-list .level-container .level .records .percent,
-.page-list .level-container .level .records .hz {
-    text-align: end;
-}
-
-/* hover affordance */
-.page-list .meta-container .og a:hover,
-.page-list .level-container .level .records a:hover {
-    text-decoration: underline;
-}
-
-/* ---------- META PANEL ---------- */
+/* meta card */
 .page-list .meta {
-    display: flex;
-    flex-direction: column;
-    gap: 2.25rem;
-    padding: 1.75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--card-shadow);
+  position: sticky;
+  top: 2rem;
 }
 
-/* errors & editors spacing */
-.page-list .meta .errors {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+/* headings */
+.page-list .meta h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
 }
 
-.page-list .meta .errors .error {
-    padding: 1.125rem;
-    border-radius: 0.5rem;
-}
-
-.page-list .meta .editors {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
+/* editors list */
 .page-list .meta .editors li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.25rem 0;
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.45rem 0;
+  color: var(--muted);
+}
+.page-list .meta .editors li img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
 }
 
-.page-list .meta .editors li img {
-    height: 1.5rem;
+/* error banners */
+.page-list .meta .errors .error {
+  background: linear-gradient(180deg, rgba(255, 75, 75, 0.12), rgba(180, 30, 30, 0.08));
+  padding: 0.9rem;
+  border-radius: 8px;
+  color: #ffd8d8;
+  font-weight: 700;
+}
+
+/* links */
+.page-list a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+.page-list a:hover { text-decoration: underline; }
+
+/* utility: smaller muted text */
+.page-list .muted { color: var(--muted); font-size: 0.9rem; }
+
+/* small device tweaks */
+@media (max-width: 600px) {
+  .page-list .level-container .level h1 { font-size: 1.5rem; }
+  .page-list .list-container { height: 50vh; }
 }
