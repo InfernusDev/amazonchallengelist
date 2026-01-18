@@ -1,6 +1,6 @@
 /* ---------------------------
    Modern Geometry Dash List - Inspired by Pointercrate Challenge List
-   Sleek Dark Gray Theme with Horizontal Cards
+   Sleek Dark Gray Theme with Horizontal Cards (Added Extra Padding)
    --------------------------- */
 
 /* Updated color palette: Grayscale dark theme for sleek, professional look */
@@ -38,7 +38,7 @@
   grid-template-columns: minmax(280px, 320px) minmax(400px, 1fr) minmax(300px, 340px);
   gap: 1.5rem; /* Tighter gaps for sleekness */
   align-items: start;
-  padding: 2rem 1.5rem;
+  padding: 2.25rem 1.75rem; /* Slight increase in outer padding */
   background: var(--bg);
   min-height: calc(100vh - 48px);
   max-width: 100vw;
@@ -49,7 +49,7 @@
 @media (max-width: 1100px) {
   .page-list {
     grid-template-columns: 1fr;
-    padding: 1.5rem 1rem;
+    padding: 1.75rem 1.25rem;
     gap: 1.75rem;
   }
   .page-list .meta-container { order: 3; }
@@ -71,10 +71,10 @@
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1rem;
+  padding: 1.25rem; /* Tiny bit more padding */
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; /* Tighter spacing between cards */
+  gap: 1rem; /* Slightly more space between cards */
 }
 
 /* Scrollbar: Sleek and thin */
@@ -94,7 +94,7 @@
   width: 100%;
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 0.8rem;
+  padding: 1rem; /* Tiny bit more internal padding */
   box-shadow: var(--card-shadow);
   transition: all .15s ease;
   overflow: hidden;
@@ -112,7 +112,7 @@
   height: 56px; /* 16:9 aspect for videos/thumbs */
   object-fit: cover;
   border-radius: 4px;
-  margin-right: 1rem;
+  margin-right: 1.25rem; /* Slight increase */
   border: 1px solid var(--border);
 }
 
@@ -121,7 +121,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem; /* Tiny bit more vertical space */
 }
 
 .page-list .list .level .rank {
@@ -143,13 +143,13 @@
 
 /* ---------- CENTER: Level Detail - Card-like ---------- */
 .page-list .level-container .level {
-  padding: 1.5rem;
+  padding: 1.75rem; /* Tiny bit more padding */
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem; /* Slight increase */
   border: 1px solid var(--border);
 }
 
@@ -180,7 +180,7 @@
 }
 
 .page-list .level-container .level .records td {
-  padding: 0.8rem 1rem;
+  padding: 1rem 1.25rem; /* Tiny bit more cell padding */
   border-bottom: 1px solid var(--border);
 }
 
@@ -188,8 +188,8 @@
 .page-list .meta-container .meta {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 1.25rem; /* Slight increase */
+  padding: 1.75rem; /* Tiny bit more padding */
   background: var(--panel);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
@@ -200,14 +200,14 @@
 
 .page-list .meta h3 {
   font-size: 1.2rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem; /* Tiny bit more margin */
   color: var(--accent);
   font-weight: 700;
 }
 
 .page-list .meta .section { /* For moderators, helpers, etc. */
   background: var(--card-bg);
-  padding: 1rem;
+  padding: 1.25rem; /* Tiny bit more */
   border-radius: var(--radius);
   border: 1px solid var(--border);
 }
