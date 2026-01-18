@@ -1,154 +1,176 @@
-/* === PANEL / PAGE FEEL === */
-.page-list .list-container,
-.page-list .level-container,
-.page-list .meta-container {
-    padding-block: 2rem;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.25),
-        rgba(0, 0, 0, 0.45)
-    );
-    border-radius: 1rem;
+/* ---------- GLOBAL TYPING / SPACING ---------- */
+/* make text less "smushed" overall */
+.page-list,
+.page-list * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55; /* comfortable line-height for most text */
 }
 
-/* === LIST TABLE === */
+/* ---------- LIST & ROWS ---------- */
 .page-list .list {
     border-collapse: separate;
-    border-spacing: 0 0.75rem;
-    table-layout: fixed;
+    border-spacing: 0 1rem; /* more vertical space between rows */
+    table-layout: auto;
+    font-size: 1rem; /* ensure readable base size */
 }
 
-/* Rank numbers feel rigid & arcade-like */
+/* Rank column: give more breathing room */
 .page-list .list .rank {
-    font-weight: 700;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    padding-right: 1rem;
     text-align: end;
+    padding-right: 1.75rem;
+    line-height: 1.6;
+    vertical-align: middle;
 }
 
-/* === GD-STYLE BUTTON === */
+/* Level cell container */
+.page-list .list .level {
+    width: 100%;
+}
+
+/* ---------- BUTTON (level entry) ---------- */
 .page-list .list .level button {
     width: 100%;
-    background:
-        linear-gradient(
-            180deg,
-            var(--color-background-hover),
-            var(--color-background)
-        );
-    color: var(--color-on-background);
-    border: 3px solid rgba(255, 255, 255, 0.15);
-    border-radius: 0.75rem;
-    padding: 1rem 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;      /* vertically center multi-line text / icons */
+    gap: 0.75rem;             /* space between icon + text if present */
+    padding: 1.25rem 1.5rem;  /* larger padding all around */
+    min-height: 3.2rem;       /* prevents tight single-line height */
+    line-height: 1.6;         /* space between wrapped lines */
+    white-space: normal;      /* allow wrapping */
+    word-break: break-word;
+    overflow-wrap: anywhere;
     text-align: start;
-    cursor: pointer;
-
-    /* GD-style depth */
-    box-shadow:
-        inset 0 2px 0 rgba(255, 255, 255, 0.15),
-        inset 0 -3px 0 rgba(0, 0, 0, 0.4),
-        0 4px 0 rgba(0, 0, 0, 0.6);
-
-    transition:
-        transform 0.08s ease,
-        box-shadow 0.08s ease,
-        background-color 0.1s ease;
 }
 
-/* Hover: pop forward */
-.page-list .list .level button:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        inset 0 2px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -3px 0 rgba(0, 0, 0, 0.5),
-        0 6px 0 rgba(0, 0, 0, 0.7);
-}
+/* hover / active preserved from GD style */
+.page-list .list .level button:hover { transform: translateY(-2px); }
+.page-list .list .level button:active { transform: translateY(2px); }
 
-/* Active: pressed in */
-.page-list .list .level button:active {
-    transform: translateY(2px);
-    box-shadow:
-        inset 0 3px 0 rgba(0, 0, 0, 0.6),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1);
-}
-
-/* === ACTIVE SELECTION (GD YELLOW FEEL) === */
+/* error / active states keep spacing */
+.page-list .list .level.error button,
 .page-list .list .level.active button {
-    background: linear-gradient(
-        180deg,
-        #ffd84a,
-        #f2b705
-    );
-    color: #2a1d00;
-    border-color: #fff3b0;
+    padding: 1.25rem 1.5rem;
+    min-height: 3.2rem;
 }
 
-/* === ERROR / REMOVED LEVEL === */
-.page-list .list .level.error button {
-    background: linear-gradient(
-        180deg,
-        #5a1a1a,
-        #3a0f0f
-    );
-    color: #ff9a9a;
-    border-color: #aa4444;
-    cursor: not-allowed;
-    text-decoration: line-through;
-    opacity: 0.8;
-}
-
-/* === LEVEL CONTENT PANEL === */
+/* ---------- LEVEL PANEL ---------- */
 .page-list .level-container .level {
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 6px 0 rgba(0, 0, 0, 0.6);
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;       /* bigger gap between subsections */
+    padding: 2.25rem;  /* more inner space */
     max-width: 48rem;
 }
 
-/* === STATS: ICON-LIKE COLUMNS === */
-.page-list .level-container .level .stats li {
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+/* authors grid: more vertical breathing room */
+.page-list .level-container .level .level-authors {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-auto-rows: minmax(1.5rem, max-content);
+    gap: 1.25rem;
 }
 
-/* === RECORDS TABLE === */
+/* video block keep aspect but add margin */
+.page-list .level-container .level .video {
+    aspect-ratio: 16/9;
+    margin-bottom: 0.5rem;
+}
+
+/* ---------- STATS ---------- */
+.page-list .level-container .level .stats {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    gap: 3rem;           /* more spacing between stat columns */
+    padding-block: 0.75rem;
+}
+
+.page-list .level-container .level .stats li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.5rem 0;
+}
+
+/* ---------- RECORDS TABLE ---------- */
 .page-list .level-container .level .records {
+    table-layout: fixed;
     border-collapse: separate;
-    border-spacing: 0 0.5rem;
+    border-spacing: 0 0.6rem; /* vertical space between record rows */
 }
 
 .page-list .level-container .level .records tr {
-    background: rgba(0, 0, 0, 0.3);
+    display: table-row;
+    vertical-align: middle;
+    background: transparent; /* keep panel styling from parent */
+}
+
+.page-list .level-container .level .records tr td {
+    padding: 1rem 1.25rem;    /* more padding per cell */
+    line-height: 1.6;
+    vertical-align: middle;
+}
+
+.page-list .level-container .level .records .percent,
+.page-list .level-container .level .records .user,
+.page-list .level-container .level .records .hz {
+    padding-block: 1.25rem;
+}
+
+/* make user column expand and not cramp text */
+.page-list .level-container .level .records .user {
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* right-align numeric-ish columns with breathing room */
+.page-list .level-container .level .records .percent,
+.page-list .level-container .level .records .hz {
+    text-align: end;
+}
+
+/* hover affordance */
+.page-list .meta-container .og a:hover,
+.page-list .level-container .level .records a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- META PANEL ---------- */
+.page-list .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    padding: 1.75rem;
+}
+
+/* errors & editors spacing */
+.page-list .meta .errors {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.page-list .meta .errors .error {
+    padding: 1.125rem;
     border-radius: 0.5rem;
 }
 
-.page-list .level-container .level .records td {
-    padding: 0.75rem 1rem;
+.page-list .meta .editors {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-/* === META PANELS === */
-.page-list .meta {
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 6px 0 rgba(0, 0, 0, 0.6);
+.page-list .meta .editors li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
 }
 
-/* Error blocks feel like GD warning panels */
-.page-list .meta .errors .error {
-    background: linear-gradient(
-        180deg,
-        #ff4b4b,
-        #b30000
-    );
-    font-weight: 700;
+.page-list .meta .editors li img {
+    height: 1.5rem;
 }
