@@ -1,6 +1,6 @@
 /* ---------------------------
    Modern / Clean Geometry Dash - Pointercrate Inspired
-   Apply after existing CSS to override previous rules
+   MORE SPACED OUT VERSION
    --------------------------- */
 
 /* color palette (dark theme) */
@@ -12,12 +12,12 @@
   --accent-2: #7bd389;
   --text: #ececec;
   --subtle: rgba(255,255,255,0.04);
-  --radius: 12px;
+  --radius: 14px; /* slightly bigger radius for softer look */
   --glass: rgba(255,255,255,0.02);
-  --card-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  --card-shadow: 0 8px 24px rgba(0,0,0,0.65);
 }
 
-/* base typography & smoothing */
+/* base typography & smoothing + more line-height */
 .page-list,
 .page-list * {
   box-sizing: border-box;
@@ -25,16 +25,16 @@
   -moz-osx-font-smoothing: grayscale;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.75; /* increased for better readability */
 }
 
 /* layout container (three-column) */
 .page-list {
   display: grid;
-  grid-template-columns: 300px 1fr 320px;
-  gap: 2rem;
+  grid-template-columns: 320px 1fr 340px; /* slightly wider sidebars */
+  gap: 3rem; /* bigger gap between columns */
   align-items: start;
-  padding: 2rem;
+  padding: 3rem 2.5rem; /* more outer padding */
   background: linear-gradient(180deg, #121216 0%, var(--bg) 100%);
   min-height: calc(100vh - 48px);
 }
@@ -43,8 +43,8 @@
 @media (max-width: 980px) {
   .page-list {
     grid-template-columns: 1fr;
-    padding: 1rem;
-    gap: 1.25rem;
+    padding: 2rem 1.5rem;
+    gap: 2.5rem;
   }
   .page-list .meta-container { order: 3; }
   .page-list .level-container { order: 2; }
@@ -55,7 +55,7 @@
 .page-list .list-container {
   position: relative;
   align-self: start;
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 8rem); /* more vertical breathing room */
   overflow: hidden;
   padding: 0;
   border-radius: var(--radius);
@@ -63,57 +63,48 @@
   box-shadow: var(--card-shadow);
 }
 
-/* internal scroll region with thin custom scrollbar */
+/* internal scroll region */
 .page-list .list-container .list-scroll {
   height: 100%;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 1.5rem; /* more padding inside scroll area */
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1.25rem; /* bigger gap between list items */
 }
 
 /* thin modern scrollbar */
 .page-list .list-container .list-scroll::-webkit-scrollbar { width: 10px; }
 .page-list .list-container .list-scroll::-webkit-scrollbar-track { background: transparent; }
 .page-list .list-container .list-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.35));
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.4));
   border-radius: 10px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
-/* list layout: each row is a card */
-.page-list .list {
-  display: block; /* we use a flex column of cards instead of table rows */
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-}
-
 /* individual level item as a clean card */
 .page-list .list .level {
   display: block;
-  position: relative; /* Added: for absolute positioning of .rank */
+  position: relative;
   width: 100%;
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.04));
   padding: 0;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.45);
-  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
   overflow: hidden;
 }
 
 /* rank badge left */
 .page-list .list .level .rank {
   position: absolute;
-  left: 1rem;
+  left: 1.25rem;
   top: 50%;
   transform: translateY(-50%);
   font-weight: 700;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   opacity: 0.95;
 }
 
@@ -121,58 +112,47 @@
 .page-list .list .level button {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1.1rem;
   width: 100%;
   text-align: left;
-  padding: 1rem 1.2rem 1rem 3.5rem; /* Adjusted: more left padding to account for .rank */
+  padding: 1.3rem 1.4rem 1.3rem 4rem; /* more left padding for rank + overall padding */
   background: transparent;
   border: none;
   color: var(--text);
   font-weight: 600;
   cursor: pointer;
-  min-height: 56px;
+  min-height: 64px; /* taller items */
 }
 
 /* level title */
 .page-list .list .level button .title {
   flex: 1 1 auto;
-  font-size: 0.95rem;
+  font-size: 1rem;
   letter-spacing: 0.01em;
-  color: var(--text);
 }
 
-/* subtle meta on the right of each item */
+/* subtle meta on the right */
 .page-list .list .level button .meta {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   white-space: nowrap;
-  margin-left: 0.5rem;
+  margin-left: 0.75rem;
 }
 
 /* hover / active */
 .page-list .list .level:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.65);
 }
 .page-list .list .level:active {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* selected / active state */
 .page-list .list .level.active {
-  outline: 3px solid rgba(255,210,74,0.15);
-  background: linear-gradient(180deg, rgba(255,210,74,0.03), rgba(0,0,0,0.04));
+  outline: 3px solid rgba(255,210,74,0.2);
+  background: linear-gradient(180deg, rgba(255,210,74,0.05), rgba(0,0,0,0.05));
 }
-
-/* error style */
-.page-list .list .level.error {
-  opacity: 0.7;
-  filter: grayscale(0.15);
-  text-decoration: line-through;
-}
-
-/* spacing for many items */
-.page-list .list .spacer { height: 0.5rem; }
 
 /* ---------- CENTER: Level content ---------- */
 .page-list .level-container {
@@ -183,66 +163,68 @@
 
 /* inner card for the selected level */
 .page-list .level-container .level {
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.045));
   border-radius: var(--radius);
-  padding: 2rem;
+  padding: 2.5rem; /* more padding inside main card */
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem; /* bigger gaps between sections */
 }
 
 /* Title and meta row */
 .page-list .level-container .level h1 {
-  margin: 0 0 0.75rem 0;
-  font-size: 2.1rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 1rem 0;
+  font-size: 2.4rem;
+  letter-spacing: -0.025em;
   font-weight: 800;
 }
 
 /* creators / small meta */
 .page-list .level-container .level .small-meta {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: center;
   color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
-.page-list .level-container .level .small-meta b { color: var(--text); font-weight: 700; }
+.page-list .level-container .level .small-meta b { 
+  color: var(--text); 
+  font-weight: 700; 
+}
 
-/* media/video - enhanced with modern embed styling */
+/* media/video */
 .page-list .level-container .level .video {
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--glass);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-  margin-bottom: 0.5rem;
-  position: relative; /* If needed for overlays */
+  margin-bottom: 1rem;
 }
 
-/* points/id/password row - improved alignment */
+/* points/id/password row */
 .page-list .level-container .level .info-row {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   align-items: flex-start;
   justify-content: flex-start;
   color: var(--muted);
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
 }
 .page-list .level-container .level .info-row .item {
-  min-width: 110px;
-  font-size: 0.85rem;
+  min-width: 120px;
+  font-size: 0.9rem;
 }
 
 /* records heading */
 .page-list .level-container .level h2 {
-  margin-top: 1.4rem;
-  font-size: 1.4rem;
+  margin-top: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
 }
 
@@ -250,127 +232,71 @@
 .page-list .level-container .level .records {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 0.5rem;
-  margin-top: 0.75rem;
+  border-spacing: 0 1rem; /* much bigger vertical spacing between rows */
+  margin-top: 1rem;
 }
 .page-list .level-container .level .records tr {
-  background: rgba(255,255,255,0.01);
-  border-radius: 8px;
-  transition: background .12s;
+  background: rgba(255,255,255,0.015);
+  border-radius: 10px;
+  transition: background .15s;
 }
 .page-list .level-container .level .records td {
-  padding: 0.7rem 0.9rem;
+  padding: 1rem 1.2rem; /* more padding in cells */
   vertical-align: middle;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text);
 }
 .page-list .level-container .level .records tr:hover {
-  background: rgba(255,255,255,0.02);
+  background: rgba(255,255,255,0.03);
 }
 
-/* First and last td rounded corners for modern card-like rows */
+/* rounded corners on table rows */
 .page-list .level-container .level .records td:first-child {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 .page-list .level-container .level .records td:last-child {
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* ---------- RIGHT: Meta / Editors ---------- */
-.page-list .meta-container {
-  position: relative;
-  align-self: start;
-}
-
-/* meta card */
 .page-list .meta {
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.045));
   border-radius: var(--radius);
-  padding: 1.8rem;
+  padding: 2.2rem; /* more padding */
   box-shadow: var(--card-shadow);
   position: sticky;
-  top: 2rem;
-}
-
-/* headings */
-.page-list .meta h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
+  top: 3rem; /* higher sticky position */
 }
 
 /* editors list */
 .page-list .meta .editors li {
   display: flex;
-  gap: 0.85rem;
+  gap: 1rem;
   align-items: center;
-  padding: 0.45rem 0;
+  padding: 0.6rem 0;
   color: var(--muted);
 }
 .page-list .meta .editors li img {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
-/* error banners */
-.page-list .meta .errors .error {
-  background: linear-gradient(180deg, rgba(255, 75, 75, 0.12), rgba(180, 30, 30, 0.08));
-  padding: 0.9rem;
-  border-radius: 8px;
-  color: #ffd8d8;
-  font-weight: 700;
-}
-
-/* links */
-.page-list a {
-  color: var(--accent-2);
-  text-decoration: none;
-  transition: color 0.12s ease;
-}
-.page-list a:hover { 
-  text-decoration: underline;
-  color: lighten(var(--accent-2), 10%);
-}
-
-/* utility: smaller muted text */
-.page-list .muted { color: var(--muted); font-size: 0.9rem; }
-
 /* small device tweaks */
 @media (max-width: 600px) {
-  .page-list .level-container .level h1 { font-size: 1.5rem; }
-  .page-list .list-container { height: 50vh; }
+  .page-list .level-container .level h1 { font-size: 1.8rem; }
+  .page-list .list-container { height: 60vh; }
+  .page-list .level-container .level { padding: 1.8rem; }
 }
 
-/* Additional modern enhancements */
-/* Smooth transitions for interactive elements */
+/* Additional modern touches */
 .page-list button, .page-list a {
-  transition: all 0.12s ease;
+  transition: all 0.15s ease;
 }
-
-/* Improve button styles in center panel */
-.page-list .level-container .level button {
-  background: var(--subtle);
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  font-weight: 600;
-  color: var(--text);
-  border: none;
-  cursor: pointer;
-}
-.page-list .level-container .level button:hover {
-  background: var(--accent-2);
-  color: #000;
-}
-
-/* Icon sizing and colors - assuming icons are present */
-.page-list .level-container .level img, .page-list .level-container .level svg {
-  filter: brightness(1.1);
-  transition: transform 0.12s ease;
-}
-.page-list .level-container .level button:hover img, .page-list .level-container .level button:hover svg {
-  transform: scale(1.1);
+.page-list a:hover { 
+  color: #9ae0a8;
+  text-decoration: underline;
 }
