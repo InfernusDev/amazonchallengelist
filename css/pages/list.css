@@ -4,11 +4,11 @@
    --------------------------- */
 
 /* color palette (dark theme) */
-:root{
+:root {
   --bg: #18181a;
   --panel: #1f1f23;
   --muted: #9aa0a6;
-  --accent: #ffd24a;     /* pointercrate-like highlight */
+  --accent: #ffd24a; /* pointercrate-like highlight */
   --accent-2: #7bd389;
   --text: #ececec;
   --subtle: rgba(255,255,255,0.04);
@@ -46,7 +46,6 @@
     padding: 1rem;
     gap: 1.25rem;
   }
-
   .page-list .meta-container { order: 3; }
   .page-list .level-container { order: 2; }
   .page-list .list-container { order: 1; }
@@ -96,6 +95,7 @@
 /* individual level item as a clean card */
 .page-list .list .level {
   display: block;
+  position: relative; /* Added: for absolute positioning of .rank */
   width: 100%;
   border-radius: 10px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
@@ -119,19 +119,18 @@
 
 /* clickable area */
 .page-list .list .level button {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   width: 100%;
   text-align: left;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1rem 3.5rem; /* Adjusted: more left padding to account for .rank */
   background: transparent;
   border: none;
   color: var(--text);
   font-weight: 600;
   cursor: pointer;
   min-height: 56px;
-  align-items: center;
-  display: flex;
-  gap: 0.9rem;
 }
 
 /* level title */
@@ -155,7 +154,6 @@
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
-
 .page-list .list .level:active {
   transform: translateY(-1px);
 }
@@ -189,7 +187,8 @@
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: var(--card-shadow);
-  display: block;
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
 }
 
@@ -211,10 +210,9 @@
   margin-bottom: 1rem;
   flex-wrap: wrap;
 }
-
 .page-list .level-container .level .small-meta b { color: var(--text); font-weight: 700; }
 
-/* media/video */
+/* media/video - enhanced with modern embed styling */
 .page-list .level-container .level .video {
   width: 100%;
   aspect-ratio: 16/9;
@@ -223,9 +221,10 @@
   background: var(--glass);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
   margin-bottom: 0.5rem;
+  position: relative; /* If needed for overlays */
 }
 
-/* points/id/password row */
+/* points/id/password row - improved alignment */
 .page-list .level-container .level .info-row {
   display: flex;
   gap: 2rem;
@@ -235,7 +234,6 @@
   margin-top: 0.75rem;
   flex-wrap: wrap;
 }
-
 .page-list .level-container .level .info-row .item {
   min-width: 110px;
   font-size: 0.85rem;
@@ -255,22 +253,29 @@
   border-spacing: 0 0.5rem;
   margin-top: 0.75rem;
 }
-
 .page-list .level-container .level .records tr {
   background: rgba(255,255,255,0.01);
   border-radius: 8px;
   transition: background .12s;
 }
-
 .page-list .level-container .level .records td {
   padding: 0.7rem 0.9rem;
   vertical-align: middle;
   font-size: 0.95rem;
   color: var(--text);
 }
-
 .page-list .level-container .level .records tr:hover {
   background: rgba(255,255,255,0.02);
+}
+
+/* First and last td rounded corners for modern card-like rows */
+.page-list .level-container .level .records td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.page-list .level-container .level .records td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /* ---------- RIGHT: Meta / Editors ---------- */
@@ -324,8 +329,12 @@
 .page-list a {
   color: var(--accent-2);
   text-decoration: none;
+  transition: color 0.12s ease;
 }
-.page-list a:hover { text-decoration: underline; }
+.page-list a:hover { 
+  text-decoration: underline;
+  color: lighten(var(--accent-2), 10%);
+}
 
 /* utility: smaller muted text */
 .page-list .muted { color: var(--muted); font-size: 0.9rem; }
@@ -334,4 +343,34 @@
 @media (max-width: 600px) {
   .page-list .level-container .level h1 { font-size: 1.5rem; }
   .page-list .list-container { height: 50vh; }
+}
+
+/* Additional modern enhancements */
+/* Smooth transitions for interactive elements */
+.page-list button, .page-list a {
+  transition: all 0.12s ease;
+}
+
+/* Improve button styles in center panel */
+.page-list .level-container .level button {
+  background: var(--subtle);
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+}
+.page-list .level-container .level button:hover {
+  background: var(--accent-2);
+  color: #000;
+}
+
+/* Icon sizing and colors - assuming icons are present */
+.page-list .level-container .level img, .page-list .level-container .level svg {
+  filter: brightness(1.1);
+  transition: transform 0.12s ease;
+}
+.page-list .level-container .level button:hover img, .page-list .level-container .level button:hover svg {
+  transform: scale(1.1);
 }
